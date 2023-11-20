@@ -264,7 +264,7 @@ PURPLE = (128, 0, 128)
 
 screen_width = COLUMNS * WIDTH
 screen_height = ROWS * HEIGHT
-screen=pygame.display.set_mode((screen_width,screen_height),RESIZABLE)
+screen=pygame.display.set_mode((screen_width,screen_height),pygame.RESIZABLE)
 pygame.display.set_caption('RUSH HOUR')
 
 while True:
@@ -272,10 +272,13 @@ while True:
         if event.type == pygame.QUIT:
             pygame.quit()
             sys.exit()
-        if event.type == VIDEORESIZE:
+        elif event.type == pygame.KEYDOWN:
+            if event.key == pygame.K_ESCAPE:
+                pygame.quit()
+                sys.exit()
+        elif event.type == pygame.VIDEORESIZE:
             screen_width, screen_height = event.size
-            screen = pygame.display.set_mode(
-                (screen_width, screen_height), RESIZABLE)
+            screen = pygame.display.set_mode((screen_width, screen_height), pygame.RESIZABLE)
 
     screen.fill(WHITE)
     
