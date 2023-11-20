@@ -13,7 +13,7 @@ import pandas as pd
 class Loader:
     
     def __init__(self):
-        print("Class for load game was created")
+        """print("Class for load game was created")"""
     
     def load_field(self):
         file_path = 'field.txt'
