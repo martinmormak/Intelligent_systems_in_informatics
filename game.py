@@ -13,7 +13,7 @@ class Game:
         self.loader = loader
 
     def main_loop(self):
-        field_array = self.loader.load_field()
+        field_array = self.loader.load_cars()
         sw=self.gui.screen_width
         w=self.gui.WIDTH
         sh=self.gui.screen_height

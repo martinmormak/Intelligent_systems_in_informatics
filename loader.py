@@ -27,7 +27,7 @@ class Loader:
             print(row)
         return field_array
     
-    def generate_exit(x,y,orientation,field_array,cars):
+    def generate_exit(self,x,y,orientation,field_array,cars):
         random_number = random.randint(0, 1)
         print(random_number)
         if(orientation=="v"):
@@ -213,7 +213,7 @@ class Loader:
                         print("y")
                         print(y)
             if(color==2):
-                field_array=generate_exit(x,y,orientation,field_array,cars)
+                field_array=self.generate_exit(x,y,orientation,field_array,cars)
         
             color = color + 1
         return field_array
