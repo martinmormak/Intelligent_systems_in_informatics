@@ -8,6 +8,7 @@ import pygame
 
 from loader import Loader
 from gui import GUI
+from control import Control
 from game import Game
 
 if __name__ == "__main__":
@@ -21,7 +22,8 @@ if __name__ == "__main__":
 
     game_loader = Loader()
     game_gui = GUI(SCREEN_WIDTH, SCREEN_HEIGHT, 8, 8)
-    rush_hour_game = Game(game_gui, game_loader)
+    game_control = Control(8, 8)
+    rush_hour_game = Game(game_gui, game_loader, game_control)
 
     rush_hour_game.main_loop()
         

@@ -11,10 +11,6 @@ import random
 import pandas as pd
 
 class Loader:
-    
-    def __init__(self):
-        """print("Class for load game was created")"""
-    
     def load_field(self):
         file_path = 'field.txt'
         
@@ -23,13 +19,12 @@ class Loader:
 
         field_array = ast.literal_eval(content)
 
-        for row in field_array:
-            print(row)
+        """for row in field_array:
+            print(row)"""
         return field_array
     
     def generate_exit(self,x,y,orientation,field_array,cars):
         random_number = random.randint(0, 1)
-        print(random_number)
         if(orientation=="v"):
             if(random_number==0):
                 for i in range(1, len(cars)):
@@ -59,8 +54,6 @@ class Loader:
                     if cars[4][i] == orientation and 1 <= cars[2][i] < x and cars[3][i] == y:
                         for q in range(1, len(cars)):
                             if cars[4][q] == orientation and x < cars[2][q] <= 6 and cars[3][q] == y:
-                                print(i)
-                                print(q)
                                 print("Problem generate exit")
                                 sys.exit()
                         field_array[y][7]=0
@@ -138,7 +131,7 @@ class Loader:
                         if(field_array[y][x] == 0 and field_array[y+1][x] == 0):
                             field_array[y][x] = color
                             field_array[y+1][x] = color
-                        else:
+                        """else:
                             print(color)
                             print(y+1)
                             print(x+1)
@@ -150,13 +143,13 @@ class Loader:
                         print("x")
                         print(x)
                         print("y")
-                        print(y)
+                        print(y)"""
                 else:
                     if(1 <= x <= 5):
                         if(field_array[y][x] == 0 and field_array[y][x+1] == 0):
                             field_array[y][x] = color
                             field_array[y][x+1] = color
-                        else:
+                        """else:
                             print(color)
                             print(y+1)
                             print(x+1)
@@ -168,7 +161,7 @@ class Loader:
                         print("x")
                         print(x)
                         print("y")
-                        print(y)
+                        print(y)"""
             else:
                 if orientation == "v":
                     if(1 <= y <= 4):
@@ -176,7 +169,7 @@ class Loader:
                             field_array[y][x] = color
                             field_array[y+1][x] = color
                             field_array[y+2][x] = color
-                        else:
+                        """else:
                             print(color)
                             print(y+1)
                             print(x+1)
@@ -190,14 +183,14 @@ class Loader:
                         print("x")
                         print(x)
                         print("y")
-                        print(y)
+                        print(y)"""
                 else:
                     if(1 <= x <= 4):
                         if(field_array[y][x] == 0 and field_array[y][x+1] == 0 and field_array[y][x+2] == 0):
                             field_array[y+1][x+1] = color
                             field_array[y+1][x+2] = color
                             field_array[y+1][x+3] = color
-                        else:
+                        """else:
                             print(color)
                             print(y+1)
                             print(x+1)
@@ -211,7 +204,7 @@ class Loader:
                         print("x")
                         print(x)
                         print("y")
-                        print(y)
+                        print(y)"""
             if(color==2):
                 field_array=self.generate_exit(x,y,orientation,field_array,cars)
         

@@ -8,16 +8,18 @@ Created on Mon Nov 20 08:47:30 2023
 import pygame
 
 class Game:
-    def __init__(self, gui, loader):
+    def __init__(self, gui, loader, control):
         self.gui = gui
         self.loader = loader
+        self.control = control
 
     def main_loop(self):
-        field_array = self.loader.load_cars()
+        field_array = self.loader.load_field()
         sw=self.gui.screen_width
         w=self.gui.WIDTH
         sh=self.gui.screen_height
         h=self.gui.HEIGHT
+        print(self.control.isFinished(field_array))
 
         while True:
             self.gui.handle_events()
