@@ -15,14 +15,15 @@ class HashTable:
     def __init__(self, capacity): 
         self.capacity = capacity 
         self.size = 0
-        self.table = [None] * capacity 
+        self.table = [None] * capacity
   
-    def _hash(self, key): 
-        return hash(key) % self.capacity 
+    def _hash(self, key):
+        parts = key.split()
+        return int(parts[1])-1
   
-    def insert(self, key, field_array): 
-        index = self._hash(key) 
-  
+    def insert(self, key, field_array):
+        index = self._hash(key)
+        
         if self.table[index] is None: 
             self.table[index] = Node(key, field_array) 
             self.size += 1
@@ -78,31 +79,63 @@ class HashTable:
         except KeyError: 
             return False
 
-if __name__ == '__main__': 
-  
-    # Create a hash table with 
-    # a capacity of 5 
-    ht = HashTable(5) 
-  
-    # Add some key-value pairs 
-    # to the hash table 
-    ht.insert("apple", 3) 
-    ht.insert("banana", 2) 
-    ht.insert("cherry", 5)
-  
-    # Check if the hash table 
-    # contains a key 
-    print("apple" in ht)  # True 
-    print("durian" in ht)  # False 
-  
-    # Get the value for a key 
-    print(ht.search("banana"))  # 2 
-  
-    # Update the value for a key 
-    ht.insert("banana", 4) 
-    print(ht.search("banana"))  # 4 
+    def contains_array(self, target_array):
+        for node in self.table:
+            current = node
+            while current:
+                if current.field_array == target_array:
+                    return True
+                current = current.next
+        return False
+
+# main.py (usage example)
+if __name__ == '__main__':
+    ht = HashTable(5)
+
+    a1 = [[1, 1, 1, 1, 1, 1, 1, 1],
+          [1, 5, 5, 0, 3, 0, 6, 1],
+          [1, 8, 0, 0, 3, 4, 6, 1],
+          [1, 8, 2, 2, 3, 4, 9, 0],
+          [1, 8, 0, 0, 0, 4, 9, 1],
+          [1, 7, 0, 0, 0, 0, 0, 1],
+          [1, 7, 0, 0, 0, 0, 0, 1],
+          [1, 1, 1, 1, 1, 1, 1, 1]]
+
+    a2 = [[1, 1, 1, 1, 1, 1, 1, 1],
+          [1, 5, 5, 0, 3, 4, 6, 1],
+          [1, 8, 0, 0, 3, 4, 6, 1],
+          [1, 8, 2, 2, 3, 4, 9, 0],
+          [1, 8, 0, 0, 0, 0, 9, 1],
+          [1, 7, 0, 0, 0, 0, 0, 1],
+          [1, 7, 0, 0, 0, 0, 0, 1],
+          [1, 1, 1, 1, 1, 1, 1, 1]]
+
+    a3 = [[1, 1, 1, 1, 1, 1, 1, 1],
+          [1, 5, 5, 0, 3, 0, 6, 1],
+          [1, 8, 0, 0, 3, 4, 6, 1],
+          [1, 8, 2, 2, 3, 4, 9, 0],
+          [1, 8, 0, 0, 0, 4, 9, 1],
+          [1, 7, 0, 0, 0, 0, 0, 1],
+          [1, 7, 0, 0, 0, 0, 0, 1],
+          [1, 1, 1, 1, 1, 1, 1, 1]]
+
+    ht.insert("a 0", a1)
     
-  
-    ht.remove("apple") 
-    # Check the size of the hash table 
-    print(len(ht))  # 3 
+    
+    print(ht.contains_array(a1))
+    print(ht.contains_array(a2))
+    print(ht.contains_array(a3))
+
+    ht.insert("a 4", a2)
+    
+    
+    print(ht.contains_array(a1))
+    print(ht.contains_array(a2))
+    print(ht.contains_array(a3))
+    
+    
+    ht.insert("a 1", a3)
+
+    print(ht.contains_array(a1))
+    print(ht.contains_array(a2))
+    print(ht.contains_array(a3))

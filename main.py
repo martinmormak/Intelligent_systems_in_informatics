@@ -23,7 +23,7 @@ if __name__ == "__main__":
     game_loader = Loader()
     game_gui = GUI(SCREEN_WIDTH, SCREEN_HEIGHT, 8, 8)
     game_control = Control(8, 8)
-    rush_hour_game = Game(game_gui, game_loader, game_control)
+    rush_hour_game = Game(game_gui, game_loader)
 
     rush_hour_game.main_loop()
         

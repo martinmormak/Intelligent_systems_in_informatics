@@ -30,7 +30,18 @@ class Control:
                     exit_y_position=row
                     break"""
                     return True
-        return False 
+        return False
+        """for row in range(self.rows):
+            if row==0 or row==self.rows-1 :
+                for col in range(self.columns):
+                    if field_array[row][col]==0 and field_array[row][col]==2:
+                        return True
+            else:
+                if field_array[row][0]==0 and field_array[row][1]==2:
+                    return True
+                elif field_array[row][self.columns-1]==0 and field_array[row][self.columns-2]==2:
+                    return True
+        return False """
         """if exit_y_position==0:
             if field_array[1][exit_x_position]==2:
                 return True
