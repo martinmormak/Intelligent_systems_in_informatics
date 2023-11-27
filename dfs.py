@@ -38,32 +38,34 @@ class DFS:
             self.gui.update_display()
             pygame.time.Clock().tick(30)
             
-            print("from")
+            """print("from")
             for row in current_state:
-                print(row)
+                print(row)"""
             
             tuple_of_tuples = tuple(tuple(row) for row in current_state)
             if tuple_of_tuples in visited_states:
                 print("True in set")
-                continue
+                #continue
 
-            if self.explored_set.contains_array(current_state):
+            if self.explored_set.contains_2d_array(current_state):
                 print("True")
                 continue
             
             if self.control.isFinished(current_state):
                 return path
 
+
+            self.explored_set.insert(path, current_state)
             self.explored_set.insert(path,current_state)
             
             visited_states.add(tuple_of_tuples)
 
             for successor, action in self._expand(current_state):
                 stack.append((successor, action))
-                print("new")
+                """print("new")
                 for row in successor:
                     print(row)
-                print(action)
+                print(action)"""
 
         return None
     def _expand(self,current_state):
@@ -76,7 +78,6 @@ class DFS:
         for row in range(self.rows):
             for col in range(self.columns):
                 if(current_state[row][col]!=0 and current_state[row][col]!=1):
-                    print("hello")
                     if(current_state[row][col] not in visited_cars):
                         visited_cars.add(current_state[row][col])
                         """if(row!=1):
