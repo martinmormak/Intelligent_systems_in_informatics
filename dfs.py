@@ -38,9 +38,9 @@ class DFS:
             self.gui.update_display()
             pygame.time.Clock().tick(30)
             
-            """print("from")
+            print("from")
             for row in current_state:
-                print(row)"""
+                print(row)
             
             tuple_of_tuples = tuple(tuple(row) for row in current_state)
             if tuple_of_tuples in visited_states:
