@@ -37,6 +37,14 @@ class GUI:
         OLIVE = (128, 128, 0)
         DARK_GREEN = (0, 128, 0)
         PURPLE = (128, 0, 128)
+        ORANGE = (255, 165, 0)
+        PINK = (255, 192, 203)
+        BROWN = (165, 42, 42)
+        NAVY_BLUE = (0, 0, 128)
+        TEAL = (0, 128, 128)
+        GOLD = (255, 215, 0)
+        SILVER = (192, 192, 192)
+        LIGHT_GRAY = (211, 211, 211)
         for row in range(self.rows):
             for col in range(self.columns):
                 cell_value = field_array[row][col]
@@ -68,6 +76,22 @@ class GUI:
                     pygame.draw.rect(self.screen, DARK_GREEN, rect)
                 elif cell_value == 12:
                     pygame.draw.rect(self.screen, PURPLE, rect)
+                elif cell_value == 13:
+                    pygame.draw.rect(self.screen, ORANGE, rect)
+                elif cell_value == 14:
+                    pygame.draw.rect(self.screen, PINK, rect)
+                elif cell_value == 15:
+                    pygame.draw.rect(self.screen, BROWN, rect)
+                elif cell_value == 16:
+                    pygame.draw.rect(self.screen, NAVY_BLUE, rect)
+                elif cell_value == 17:
+                    pygame.draw.rect(self.screen, TEAL, rect)
+                elif cell_value == 18:
+                    pygame.draw.rect(self.screen, GOLD, rect)
+                elif cell_value == 19:
+                    pygame.draw.rect(self.screen, SILVER, rect)
+                elif cell_value == 20:
+                    pygame.draw.rect(self.screen, LIGHT_GRAY, rect)
         pass
 
     def handle_events(self):

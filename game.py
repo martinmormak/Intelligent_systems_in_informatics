@@ -36,7 +36,7 @@ class Game:
         
         initial_state = field_array
         
-        #solution_path = self.dfs.solve(initial_state)
+        solution_path = self.dfs.solve(initial_state)
         self.greedy.solve(field_array);
         
         for row in initial_state:
