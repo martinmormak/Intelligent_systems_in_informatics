@@ -33,6 +33,8 @@ class Greedy:
         w=self.gui.WIDTH
         sh=self.gui.screen_height
         h=self.gui.HEIGHT
+        expanded_states=0
+        maximal_stack_size=len(stack)
         
         while stack:
             heuristic, current_state, path = heapq.heappop(stack)
@@ -59,9 +61,15 @@ class Greedy:
                 continue
             
             if self.control.isFinished(current_state):
+                print("Maximal stack size in greedy")
+                print(maximal_stack_size)
+                print("Number of expanded states in greedy")
+                print(expanded_states)
                 return path
 
-
+            expanded_states=expanded_states+1
+            if(len(stack)>maximal_stack_size):
+                maximal_stack_size=len(stack)
             self.explored_set.insert(path, current_state)
             self.explored_set.insert(path,current_state)
             
@@ -77,7 +85,10 @@ class Greedy:
                 print(action)"""
                 
             
-
+        print("Maximal stack size in greedy")
+        print(maximal_stack_size)
+        print("Number of expanded states in greedy")
+        print(expanded_states)
         return None
         
         

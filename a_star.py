@@ -34,6 +34,8 @@ class A_star:
         w=self.gui.WIDTH
         sh=self.gui.screen_height
         h=self.gui.HEIGHT
+        expanded_states=0
+        maximal_stack_size=len(stack)
         
         while stack:
             path_function, heuristic, current_state, path, cost = heapq.heappop(stack)
@@ -60,9 +62,15 @@ class A_star:
                 continue
             
             if self.control.isFinished(current_state):
+                print("Maximal stack size in A*")
+                print(maximal_stack_size)
+                print("Number of expanded states in A*")
+                print(expanded_states)
                 return path
 
-
+            expanded_states=expanded_states+1
+            if(len(stack)>maximal_stack_size):
+                maximal_stack_size=len(stack)
             self.explored_set.insert(path, current_state)
             self.explored_set.insert(path,current_state)
             
@@ -80,7 +88,10 @@ class A_star:
                 print(action)"""
                 
             
-
+        print("Maximal stack size in A*")
+        print(maximal_stack_size)
+        print("Number of expanded states in A*")
+        print(expanded_states)
         return None
         
         
