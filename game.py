@@ -8,6 +8,8 @@ Created on Mon Nov 20 08:47:30 2023
 import pygame
 from dfs import DFS
 from greedy import Greedy
+import time
+from a_star import A_star
 
 class Game:
     def __init__(self, gui, loader):
@@ -15,6 +17,7 @@ class Game:
         self.loader = loader
         self.dfs = None
         self.greedy = None
+        self.a_star = None
         self.dfs_solve=False
         self.greedy_solve=False
         self.a_star_solve=False
@@ -28,6 +31,7 @@ class Game:
                     maximum=col
         self.dfs=DFS(8,8,maximum,self.gui)
         self.greedy=Greedy(8,8,maximum,self.gui)
+        self.a_star=A_star(8,8,maximum,self.gui)
         
         sw=self.gui.screen_width
         w=self.gui.WIDTH
@@ -37,12 +41,22 @@ class Game:
         initial_state = field_array
         
         solution_path = self.dfs.solve(initial_state)
-        self.greedy.solve(field_array);
         
+        time.sleep(3)
+        
+        greedy_solution = self.greedy.solve(field_array)
+        
+        time.sleep(3)
+        
+        a_star_solve = self.a_star.solve(field_array)
+        
+        pygame.quit()
+ 
+        """
         for row in initial_state:
             print(row)
         
-"""
+
         if solution_path:
             print("DFS found solution")
         else:
