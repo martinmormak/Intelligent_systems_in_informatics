@@ -1,9 +1,10 @@
 # -*- coding: utf-8 -*-
 """
-Created on Sun Dec  3 15:04:45 2023
+Created on Thu Dec  7 18:31:55 2023
 
 @author: zorka
 """
+
 
 
 from control import Control
@@ -12,7 +13,7 @@ import copy
 import pygame
 import heapq
 
-class Greedy:
+class A_star:
     
     def __init__(self, rows, columns, count, gui):
         
@@ -28,14 +29,14 @@ class Greedy:
         visited_states=set()
         
         stack = []
-        heapq.heappush(stack, (self.find_heuristics(initial_state), initial_state, '1 1'))
+        heapq.heappush(stack, (self.find_heuristics(initial_state) ,self.find_heuristics(initial_state), initial_state, '1 1', 0))
         sw=self.gui.screen_width
         w=self.gui.WIDTH
         sh=self.gui.screen_height
         h=self.gui.HEIGHT
         
         while stack:
-            heuristic, current_state, path = heapq.heappop(stack)
+            path_function, heuristic, current_state, path, cost = heapq.heappop(stack)
             
             self.gui.handle_events()
             self.gui.screen.fill((255, 255, 255))
@@ -67,10 +68,12 @@ class Greedy:
             
             visited_states.add(tuple_of_tuples)
 
+            cost += 1
             for successor, action in self._expand(current_state):
                #stack.append((successor, action))
                new_heuristic = self.find_heuristics(successor)
-               heapq.heappush(stack, (new_heuristic, successor,action))
+               #cost += 1
+               heapq.heappush(stack, (new_heuristic + cost, new_heuristic, successor,action,cost))
                """print("new")
                 for row in successor:
                     print(row)

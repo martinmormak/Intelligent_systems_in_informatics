@@ -45,12 +45,12 @@ class DFS:
                 print(row)"""
             
             tuple_of_tuples = tuple(tuple(row) for row in current_state)
-            if tuple_of_tuples in visited_states:
-                print("True in set")
+            #if tuple_of_tuples in visited_states:
+                #print("True in set")
                 #continue
 
             if self.explored_set.contains_2d_array(current_state):
-                print("True")
+                #print("True")
                 continue
             
             if self.control.isFinished(current_state):
