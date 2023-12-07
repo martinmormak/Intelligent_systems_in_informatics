@@ -40,9 +40,9 @@ class DFS:
             self.gui.update_display()
             pygame.time.Clock().tick(30)
             
-            print("from")
+            """print("from")
             for row in current_state:
-                print(row)
+                print(row)"""
             
             tuple_of_tuples = tuple(tuple(row) for row in current_state)
             if tuple_of_tuples in visited_states:
@@ -75,6 +75,10 @@ class DFS:
                     print(row)
                 print(action)"""
 
+        print("Maximal stack size in DFS")
+        print(maximal_stack_size)
+        print("Number of expanded states in DFS")
+        print(expanded_states)
         return None
     def _expand(self,current_state):
         moves = []

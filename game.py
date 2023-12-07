@@ -37,7 +37,13 @@ class Game:
         initial_state = field_array
         
         solution_path = self.dfs.solve(initial_state)
-        self.greedy.solve(field_array);
+        
+        if solution_path:
+            print("DFS found solution")
+        else:
+            print("DFS did't found solution")
+        
+        #self.greedy.solve(field_array);
         
         for row in initial_state:
             print(row)
