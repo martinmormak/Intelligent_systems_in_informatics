@@ -29,7 +29,9 @@ class A_star:
         visited_states=set()
         
         stack = []
-        heapq.heappush(stack, (self.find_heuristics(initial_state) ,self.find_heuristics(initial_state), initial_state, '1 1', 0))
+        heuristic = self.find_heuristics(initial_state)
+        cost=0;
+        heapq.heappush(stack, (heuristic + cost, heuristic, cost, initial_state, '1 1'))
         sw=self.gui.screen_width
         w=self.gui.WIDTH
         sh=self.gui.screen_height
@@ -38,15 +40,16 @@ class A_star:
         maximal_stack_size=len(stack)
         
         while stack:
-            path_function, heuristic, current_state, path, cost = heapq.heappop(stack)
+            path_function, heuristic, cost, current_state, path = heapq.heappop(stack)
             
             self.gui.handle_events()
             self.gui.screen.fill((255, 255, 255))
             offset_x = (sw - len(current_state[0]) * w) // 2
             offset_y = (sh - len(current_state) * h) // 2
             self.gui.draw_grid(current_state, offset_x, offset_y)
+            self.gui.write_text("A*")
             self.gui.update_display()
-            pygame.time.Clock().tick(30)
+            pygame.time.Clock().tick(0)
             
             """print("from")
             for row in current_state:
@@ -66,22 +69,23 @@ class A_star:
                 print(maximal_stack_size)
                 print("Number of expanded states in A*")
                 print(expanded_states)
+                print("Cost of expanded states in A*")
+                print(cost)
                 return path
 
             expanded_states=expanded_states+1
             if(len(stack)>maximal_stack_size):
                 maximal_stack_size=len(stack)
-            self.explored_set.insert(path, current_state)
+            #self.explored_set.insert(path, current_state)
             self.explored_set.insert(path,current_state)
             
             visited_states.add(tuple_of_tuples)
-
-            cost += 1
+            
+            new_cost=cost+1;
             for successor, action in self._expand(current_state):
                #stack.append((successor, action))
                new_heuristic = self.find_heuristics(successor)
-               #cost += 1
-               heapq.heappush(stack, (new_heuristic + cost, new_heuristic, successor,action,cost))
+               heapq.heappush(stack, (new_heuristic + new_cost, new_heuristic, new_cost, successor, action))
                """print("new")
                 for row in successor:
                     print(row)
@@ -236,6 +240,7 @@ class A_star:
                     no_of_cars += 1
                 x -= 1
                 
+        no_of_cars = 0
         return no_of_cars + distance
                 
             

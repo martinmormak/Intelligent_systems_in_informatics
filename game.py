@@ -6,9 +6,10 @@ Created on Mon Nov 20 08:47:30 2023
 """
 
 import pygame
+import time
+import random
 from dfs import DFS
 from greedy import Greedy
-import time
 from a_star import A_star
 
 class Game:
@@ -23,51 +24,60 @@ class Game:
         self.a_star_solve=False
 
     def main_loop(self):
-        field_array = self.loader.load_field()
-        maximum=field_array[0][0]
-        for row in field_array:
-            for col in row:
-                if col>maximum:
-                    maximum=col
-        self.dfs=DFS(8,8,maximum,self.gui)
-        self.greedy=Greedy(8,8,maximum,self.gui)
-        self.a_star=A_star(8,8,maximum,self.gui)
+        for i in range(1,11):
+            i=random.randint(1, 10)
+            print("Game level")
+            print(i)
+            field_array = self.loader.load_field(i)
+            maximum=field_array[0][0]
+            for row in field_array:
+                for col in row:
+                    if col>maximum:
+                        maximum=col
+            self.dfs=DFS(8,8,maximum,self.gui)
+            self.greedy=Greedy(8,8,maximum,self.gui)
+            self.a_star=A_star(8,8,maximum,self.gui)
         
-        sw=self.gui.screen_width
-        w=self.gui.WIDTH
-        sh=self.gui.screen_height
-        h=self.gui.HEIGHT
+            sw=self.gui.screen_width
+            w=self.gui.WIDTH
+            sh=self.gui.screen_height
+            h=self.gui.HEIGHT
         
-        initial_state = field_array
+            initial_state = field_array
         
-        DFS_solution = self.dfs.solve(initial_state)
+            DFS_solution = self.dfs.solve(initial_state)
         
-        if DFS_solution:
-            print("DFS found solution")
-        else:
-            print("DFS did't found solution")
+            if DFS_solution:
+                self.gui.write_text("DFS found solution")
+                print("DFS found solution")
+            else:
+                self.gui.write_text("DFS did't found solution")
+                print("DFS did't found solution")
         
-        #self.greedy.solve(field_array);
+            time.sleep(3)
         
-        time.sleep(3)
+            greedy_solution = self.greedy.solve(field_array)
         
-        greedy_solution = self.greedy.solve(field_array)
+            if greedy_solution:
+                self.gui.write_text("Greedy found solution")
+                print("Greedy found solution")
+            else:
+                self.gui.write_text("Greedy did't found solution")
+                print("Greedy did't found solution")
         
-        if greedy_solution:
-            print("Greedy found solution")
-        else:
-            print("Greedy did't found solution")
+            time.sleep(3)
         
-        time.sleep(3)
+            a_star_solution = self.a_star.solve(field_array)
         
-        a_star_solution = self.a_star.solve(field_array)
+            if a_star_solution:
+                self.gui.write_text("A* found solution")
+                print("A* found solution")
+            else:
+                self.gui.write_text("A* did't found solution")
+                print("A* did't found solution")
         
-        if a_star_solution:
-            print("A* found solution")
-        else:
-            print("A* did't found solution")
-        
-        time.sleep(3)
+            time.sleep(3)
+            break
         
         pygame.quit()
  

@@ -21,7 +21,9 @@ class DFS:
     def solve(self, initial_state):
         visited_states=set()
         stack = []
-        stack.append((initial_state, '1 1'))
+        #stack.append((initial_state, '1 1'))
+        cost=0
+        stack.append((cost, initial_state, '1 1'))
         
         sw=self.gui.screen_width
         w=self.gui.WIDTH
@@ -30,15 +32,16 @@ class DFS:
         expanded_states=0
         maximal_stack_size=len(stack)
         while stack:
-            current_state, path = stack.pop()
+            cost, current_state, path = stack.pop()
             
             self.gui.handle_events()
             self.gui.screen.fill((255, 255, 255))
             offset_x = (sw - len(current_state[0]) * w) // 2
             offset_y = (sh - len(current_state) * h) // 2
             self.gui.draw_grid(current_state, offset_x, offset_y)
+            self.gui.write_text("DFS")
             self.gui.update_display()
-            pygame.time.Clock().tick(30)
+            pygame.time.Clock().tick(0)
             
             """print("from")
             for row in current_state:
@@ -58,18 +61,21 @@ class DFS:
                 print(maximal_stack_size)
                 print("Number of expanded states in DFS")
                 print(expanded_states)
+                print("Cost of expanded states in DFS")
+                print(cost)
                 return path
 
             expanded_states=expanded_states+1
             if(len(stack)>maximal_stack_size):
                 maximal_stack_size=len(stack)
-            self.explored_set.insert(path, current_state)
+            #self.explored_set.insert(path, current_state)
             self.explored_set.insert(path,current_state)
             
             visited_states.add(tuple_of_tuples)
-
+            
+            new_cost=cost+1
             for successor, action in self._expand(current_state):
-                stack.append((successor, action))
+                stack.append((new_cost, successor, action))
                 """print("new")
                 for row in successor:
                     print(row)

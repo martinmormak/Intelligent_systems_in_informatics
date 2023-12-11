@@ -93,7 +93,16 @@ class GUI:
                 elif cell_value == 20:
                     pygame.draw.rect(self.screen, LIGHT_GRAY, rect)
         pass
-
+    
+    def write_text(self, algorytmus):
+        WHITE = (255, 255, 255)
+        font = pygame.font.Font('freesansbold.ttf', 32)
+        text = font.render(algorytmus, True, WHITE)
+        textRect = text.get_rect()
+        textRect.center = ((self.WIDTH * self.columns) // 2, self.HEIGHT // 2)
+        self.screen.blit(text, textRect)
+        pass
+    
     def handle_events(self):
         for event in pygame.event.get():
             if event.type == pygame.QUIT:

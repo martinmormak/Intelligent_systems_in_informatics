@@ -11,8 +11,8 @@ import random
 import pandas as pd
 
 class Loader:
-    def load_field(self):
-        file_path = 'field.txt'
+    def load_field(self,level):
+        file_path = 'levels/level'+str(level)+'.txt'
         
         with open(file_path, 'r') as file:
             content = file.read()
