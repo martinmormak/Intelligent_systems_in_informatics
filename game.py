@@ -22,10 +22,12 @@ class Game:
         self.dfs_solve=False
         self.greedy_solve=False
         self.a_star_solve=False
+        self.delay=0
 
     def main_loop(self):
-        for i in range(1,11):
-            i=random.randint(1, 10)
+        for i in range(1,12):
+            #i=10
+            #i=random.randint(1, 11)
             print("Game level")
             print(i)
             field_array = self.loader.load_field(i)
@@ -44,9 +46,14 @@ class Game:
             h=self.gui.HEIGHT
         
             initial_state = field_array
-        
-            DFS_solution = self.dfs.solve(initial_state)
-        
+            
+            starttime = time.time()
+            
+            DFS_solution = self.dfs.solve(initial_state,self.delay)
+            
+            print("DFS duration")
+            print(time.time()-starttime)
+            
             if DFS_solution:
                 self.gui.write_text("DFS found solution")
                 print("DFS found solution")
@@ -55,9 +62,14 @@ class Game:
                 print("DFS did't found solution")
         
             time.sleep(3)
+            
+            starttime = time.time()
         
-            greedy_solution = self.greedy.solve(field_array)
-        
+            greedy_solution = self.greedy.solve(field_array,self.delay)
+            
+            print("Greedy duration")
+            print(time.time()-starttime)
+            
             if greedy_solution:
                 self.gui.write_text("Greedy found solution")
                 print("Greedy found solution")
@@ -66,9 +78,14 @@ class Game:
                 print("Greedy did't found solution")
         
             time.sleep(3)
+            
+            starttime = time.time()
         
-            a_star_solution = self.a_star.solve(field_array)
-        
+            a_star_solution = self.a_star.solve(field_array,self.delay)
+            
+            print("A* duration")
+            print(time.time()-starttime)
+            
             if a_star_solution:
                 self.gui.write_text("A* found solution")
                 print("A* found solution")
@@ -77,7 +94,7 @@ class Game:
                 print("A* did't found solution")
         
             time.sleep(3)
-            break
+            #break
         
         pygame.quit()
  

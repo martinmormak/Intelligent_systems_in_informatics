@@ -18,7 +18,7 @@ class DFS:
         self.explored_set = HashTable(count)
         self.gui=gui
         
-    def solve(self, initial_state):
+    def solve(self, initial_state, delay):
         visited_states=set()
         stack = []
         #stack.append((initial_state, '1 1'))
@@ -41,7 +41,7 @@ class DFS:
             self.gui.draw_grid(current_state, offset_x, offset_y)
             self.gui.write_text("DFS")
             self.gui.update_display()
-            pygame.time.Clock().tick(0)
+            pygame.time.Clock().tick(delay)
             
             """print("from")
             for row in current_state:
