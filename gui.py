@@ -135,12 +135,12 @@ class GUI:
                             if(row_after==3):
                                 color = pygame.Color(0)
                                 color.hsla = (self.colors[cell_value][0], self.colors[cell_value][1], self.colors[cell_value][2], self.colors[cell_value][3])
-                                color_image = self.changColor(self.car3_image, color)
+                                color_image = self.changeColor(self.car3_image, color)
                                 self.screen.blit(color_image, (col * self.WIDTH, row * self.HEIGHT))
                             else:
                                 color = pygame.Color(0)
                                 color.hsla = (self.colors[cell_value][0], self.colors[cell_value][1], self.colors[cell_value][2], self.colors[cell_value][3])
-                                color_image = self.changColor(self.car2_image, color)
+                                color_image = self.changeColor(self.car2_image, color)
                                 self.screen.blit(color_image, (col * self.WIDTH, row * self.HEIGHT))
                         if(col>0 and cell_value==field_array[row][col+1]):
                             column_after=1
@@ -152,12 +152,12 @@ class GUI:
                             if(column_after==3):
                                 color = pygame.Color(0)
                                 color.hsla = (self.colors[cell_value][0], self.colors[cell_value][1], self.colors[cell_value][2], self.colors[cell_value][3])
-                                color_image = self.changColor(self.rotated_car3_image, color)
+                                color_image = self.changeColor(self.rotated_car3_image, color)
                                 self.screen.blit(color_image, (col * self.WIDTH, row * self.HEIGHT))
                             else:
                                 color = pygame.Color(0)
                                 color.hsla = (self.colors[cell_value][0], self.colors[cell_value][1], self.colors[cell_value][2], self.colors[cell_value][3])
-                                color_image = self.changColor(self.rotated_car2_image, color)
+                                color_image = self.changeColor(self.rotated_car2_image, color)
                                 self.screen.blit(color_image, (col * self.WIDTH, row * self.HEIGHT))
                 elif cell_value == 0:
                     pygame.draw.rect(self.screen, WHITE, rect)
@@ -165,7 +165,7 @@ class GUI:
                     pygame.draw.rect(self.screen, BLACK, rect)
         pass
     
-    def changColor(self, image, color):
+    def changeColor(self, image, color):
         colouredImage = pygame.Surface(image.get_size())
         colouredImage.fill(color)
     
