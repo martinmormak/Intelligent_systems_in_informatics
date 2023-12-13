@@ -21,12 +21,16 @@ class GUI:
 
         self.WIDTH = self.screen_width // self.columns
         self.HEIGHT = self.screen_height // self.rows
+        self.car2_image = pygame.image.load('sprites/car2.png')  # Replace with the actual image path for size 2 ship
+        self.car3_image = pygame.image.load('sprites/car3.png')  # Replace with the actual image path for size 3 ship
+        self.rotated_car2_image = pygame.transform.rotate(self.car2_image, 90)
+        self.rotated_car3_image = pygame.transform.rotate(self.car3_image, 90)
 
     def draw_grid(self, field_array, offset_x, offset_y):
         #colors
         WHITE = (255, 255, 255)
         BLACK = (0, 0, 0)
-        RED = (255, 0, 0)
+        """RED = (255, 0, 0)
         GREEN = (0, 255, 0)
         BLUE = (0, 0, 255)
         YELLOW = (255, 255, 0)
@@ -91,7 +95,45 @@ class GUI:
                 elif cell_value == 19:
                     pygame.draw.rect(self.screen, SILVER, rect)
                 elif cell_value == 20:
-                    pygame.draw.rect(self.screen, LIGHT_GRAY, rect)
+                    pygame.draw.rect(self.screen, LIGHT_GRAY, rect)"""
+        visited_cars=set()
+        for row in range(self.rows):
+            for col in range(self.columns):
+                cell_value = field_array[row][col]
+                rect = pygame.Rect(offset_x + col * self.WIDTH, offset_y + row * self.HEIGHT, self.WIDTH, self.HEIGHT)
+                if(cell_value!=0 and cell_value!=1):
+                    if(cell_value not in visited_cars):
+                        visited_cars.add(cell_value)
+                        if(row>0 and cell_value==field_array[row+1][col]):
+                            row_after=1
+                            while(cell_value==field_array[row+row_after][col]):
+                                row_after=row_after+1
+                                if(row+row_after>8-1):
+                                    row_after=row_after-1
+                                    break
+                            if(row_after==3):
+                                print(str(cell_value)+" vertical 2")
+                                self.screen.blit(self.car3_image, (col * self.WIDTH, row * self.HEIGHT))
+                            else:
+                                print(str(cell_value)+" vertical 3")
+                                self.screen.blit(self.car2_image, (col * self.WIDTH, row * self.HEIGHT))
+                        if(col>0 and cell_value==field_array[row][col+1]):
+                            column_after=1
+                            while(cell_value==field_array[row][col+column_after]):
+                                column_after=column_after+1
+                                if(col+column_after>8-1):
+                                    column_after=column_after-1
+                                    break
+                            if(column_after==3):
+                                print(str(cell_value)+" horizontal 2")
+                                self.screen.blit(self.rotated_car3_image, (col * self.WIDTH, row * self.HEIGHT))
+                            else:
+                                print(str(cell_value)+" horizontal 3")
+                                self.screen.blit(self.rotated_car2_image, (col * self.WIDTH, row * self.HEIGHT))
+                elif cell_value == 0:
+                    pygame.draw.rect(self.screen, WHITE, rect)
+                elif cell_value == 1:
+                    pygame.draw.rect(self.screen, BLACK, rect)
         pass
     
     def write_text(self, algorytmus):
