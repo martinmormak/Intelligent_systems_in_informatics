@@ -23,8 +23,29 @@ class GUI:
         self.HEIGHT = self.screen_height // self.rows
         self.car2_image = pygame.image.load('sprites/car2.png')  # Replace with the actual image path for size 2 ship
         self.car3_image = pygame.image.load('sprites/car3.png')  # Replace with the actual image path for size 3 ship
-        self.rotated_car2_image = pygame.transform.rotate(self.car2_image, 90)
-        self.rotated_car3_image = pygame.transform.rotate(self.car3_image, 90)
+        self.rotated_car2_image = pygame.transform.rotate(self.car2_image, -90)
+        self.rotated_car3_image = pygame.transform.rotate(self.car3_image, -90)
+        self.colors = [[0,0,0,100],
+                       [0,0,100,100],
+                       [0,100,50,100],
+                       [120,100,50,100],
+                       [240,100,50,100],
+                       [60,100,50,100],
+                       [300,100,50,100],
+                       [180,100,50,100],
+                       [0,100,25,100],
+                       [60,100,25,100],
+                       [120,100,25,100],
+                       [300,100,25,100],
+                       [39,100,50,100],
+                       [350,100,80,100],
+                       [0,59,41,100],
+                       [240,100,25,100],
+                       [180,100,25,100],
+                       [51,100,50,100],
+                       [0,0,73,100],
+                       [0,0,83,100],
+                       [0,0,50,100],]
 
     def draw_grid(self, field_array, offset_x, offset_y):
         #colors
@@ -112,11 +133,15 @@ class GUI:
                                     row_after=row_after-1
                                     break
                             if(row_after==3):
-                                print(str(cell_value)+" vertical 2")
-                                self.screen.blit(self.car3_image, (col * self.WIDTH, row * self.HEIGHT))
+                                color = pygame.Color(0)
+                                color.hsla = (self.colors[cell_value][0], self.colors[cell_value][1], self.colors[cell_value][2], self.colors[cell_value][3])
+                                color_image = self.changColor(self.car3_image, color)
+                                self.screen.blit(color_image, (col * self.WIDTH, row * self.HEIGHT))
                             else:
-                                print(str(cell_value)+" vertical 3")
-                                self.screen.blit(self.car2_image, (col * self.WIDTH, row * self.HEIGHT))
+                                color = pygame.Color(0)
+                                color.hsla = (self.colors[cell_value][0], self.colors[cell_value][1], self.colors[cell_value][2], self.colors[cell_value][3])
+                                color_image = self.changColor(self.car2_image, color)
+                                self.screen.blit(color_image, (col * self.WIDTH, row * self.HEIGHT))
                         if(col>0 and cell_value==field_array[row][col+1]):
                             column_after=1
                             while(cell_value==field_array[row][col+column_after]):
@@ -125,16 +150,28 @@ class GUI:
                                     column_after=column_after-1
                                     break
                             if(column_after==3):
-                                print(str(cell_value)+" horizontal 2")
-                                self.screen.blit(self.rotated_car3_image, (col * self.WIDTH, row * self.HEIGHT))
+                                color = pygame.Color(0)
+                                color.hsla = (self.colors[cell_value][0], self.colors[cell_value][1], self.colors[cell_value][2], self.colors[cell_value][3])
+                                color_image = self.changColor(self.rotated_car3_image, color)
+                                self.screen.blit(color_image, (col * self.WIDTH, row * self.HEIGHT))
                             else:
-                                print(str(cell_value)+" horizontal 3")
-                                self.screen.blit(self.rotated_car2_image, (col * self.WIDTH, row * self.HEIGHT))
+                                color = pygame.Color(0)
+                                color.hsla = (self.colors[cell_value][0], self.colors[cell_value][1], self.colors[cell_value][2], self.colors[cell_value][3])
+                                color_image = self.changColor(self.rotated_car2_image, color)
+                                self.screen.blit(color_image, (col * self.WIDTH, row * self.HEIGHT))
                 elif cell_value == 0:
                     pygame.draw.rect(self.screen, WHITE, rect)
                 elif cell_value == 1:
                     pygame.draw.rect(self.screen, BLACK, rect)
         pass
+    
+    def changColor(self, image, color):
+        colouredImage = pygame.Surface(image.get_size())
+        colouredImage.fill(color)
+    
+        finalImage = image.copy()
+        finalImage.blit(colouredImage, (0, 0), special_flags = pygame.BLEND_MULT)
+        return finalImage
     
     def write_text(self, algorytmus):
         WHITE = (255, 255, 255)
