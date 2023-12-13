@@ -15,8 +15,8 @@ if __name__ == "__main__":
     pygame.init()
 
     # Constants
-    SCREEN_WIDTH = 960
-    SCREEN_HEIGHT = 960
+    SCREEN_WIDTH = 720
+    SCREEN_HEIGHT = 720
     WIDTH = SCREEN_WIDTH // 8
     HEIGHT = SCREEN_HEIGHT // 8
 

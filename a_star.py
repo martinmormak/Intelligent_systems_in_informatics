@@ -40,6 +40,7 @@ class A_star:
         maximal_stack_size=len(stack)
         
         while stack:
+            heapq.heapify(stack)
             path_function, heuristic, cost, current_state, path = heapq.heappop(stack)
             
             self.gui.handle_events()

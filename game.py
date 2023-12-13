@@ -26,7 +26,7 @@ class Game:
 
     def main_loop(self):
         for i in range(1,12):
-            #i=10
+            #i=1
             #i=random.randint(1, 11)
             print("Game level")
             print(i)
