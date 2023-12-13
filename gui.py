@@ -129,7 +129,7 @@ class GUI:
                             row_after=1
                             while(cell_value==field_array[row+row_after][col]):
                                 row_after=row_after+1
-                                if(row+row_after>8-1):
+                                if(row+row_after>self.rows-1):
                                     row_after=row_after-1
                                     break
                             if(row_after==3):
@@ -146,7 +146,7 @@ class GUI:
                             column_after=1
                             while(cell_value==field_array[row][col+column_after]):
                                 column_after=column_after+1
-                                if(col+column_after>8-1):
+                                if(col+column_after>self.columns-1):
                                     column_after=column_after-1
                                     break
                             if(column_after==3):
