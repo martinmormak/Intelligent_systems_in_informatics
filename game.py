@@ -22,7 +22,7 @@ class Game:
         self.dfs_solve=False
         self.greedy_solve=False
         self.a_star_solve=False
-        self.delay=50
+        self.delay=0
 
     def main_loop(self):
         for i in range(1,12):

@@ -54,6 +54,10 @@ class Greedy:
             """print("from")
             for row in current_state:
                 print(row)"""
+
+            expanded_states=expanded_states+1
+            if(len(stack)>maximal_stack_size):
+                maximal_stack_size=len(stack)
             
             tuple_of_tuples = tuple(tuple(row) for row in current_state)
             #if tuple_of_tuples in visited_states:
@@ -61,7 +65,7 @@ class Greedy:
                 #continue
 
             if self.explored_set.contains_2d_array(current_state):
-                #print("True")
+                print("True")
                 continue
             
             if self.control.isFinished(current_state):
@@ -73,9 +77,6 @@ class Greedy:
                 print(cost)
                 return path
 
-            expanded_states=expanded_states+1
-            if(len(stack)>maximal_stack_size):
-                maximal_stack_size=len(stack)
             #self.explored_set.insert(path, current_state)
             self.explored_set.insert(path,current_state)
             
@@ -83,13 +84,22 @@ class Greedy:
 
             new_cost=cost+1
             for successor, action in self._expand(current_state):
+                if any(state[3] == successor for state in stack):
+                    stack
+                else:
+                    if self.explored_set.contains_2d_array(successor):
+                        stack
+                    else:
+                        new_heuristic = self.find_heuristics(successor)
+                        heapq.heappush(stack, (new_heuristic, new_heuristic, new_cost, successor, action))
+                """if self.explored_set.contains_2d_array(successor):
+                    stack
+                else:
+                    new_heuristic = self.find_heuristics(successor)
+                    heapq.heappush(stack, (new_heuristic, new_heuristic, new_cost, successor, action))"""
                #stack.append((successor, action))
-               new_heuristic = self.find_heuristics(successor)
-               heapq.heappush(stack, (new_heuristic, new_heuristic, new_cost, successor, action))
-               """print("new")
-                for row in successor:
-                    print(row)
-                print(action)"""
+               #new_heuristic = self.find_heuristics(successor)
+               #heapq.heappush(stack, (new_heuristic, new_heuristic, new_cost, successor, action))
                 
             
         print("Maximal stack size in greedy")
