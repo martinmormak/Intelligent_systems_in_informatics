@@ -57,7 +57,7 @@ class DFS:
                 #continue
 
             if self.explored_set.contains_2d_array(current_state):
-                print("True")
+                #print("True")
                 continue
             
             if self.control.isFinished(current_state):
@@ -76,17 +76,17 @@ class DFS:
             
             new_cost=cost+1
             for successor, action in self._expand(current_state):
-                if any(state[1] == successor for state in stack):
+                """if any(state[1] == successor for state in stack):
                     stack
                 else:
                     if self.explored_set.contains_2d_array(successor):
                         stack
                     else:
-                        stack.append((new_cost, successor, action))
-                """if self.explored_set.contains_2d_array(successor):
+                        stack.append((new_cost, successor, action))"""
+                if self.explored_set.contains_2d_array(successor):
                     stack
                 else:
-                    stack.append((new_cost, successor, action))"""
+                    stack.append((new_cost, successor, action))
                     
                 #stack.append((new_cost, successor, action))
                 """print("new")
