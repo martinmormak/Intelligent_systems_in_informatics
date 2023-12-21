@@ -173,10 +173,10 @@ class GUI:
         finalImage.blit(colouredImage, (0, 0), special_flags = pygame.BLEND_MULT)
         return finalImage
     
-    def write_text(self, algorytmus):
+    def write_text(self, algoritmus):
         WHITE = (255, 255, 255)
         font = pygame.font.Font('freesansbold.ttf', 32)
-        text = font.render(algorytmus, True, WHITE)
+        text = font.render(algoritmus, True, WHITE)
         textRect = text.get_rect()
         textRect.center = ((self.WIDTH * self.columns) // 2, self.HEIGHT // 2)
         self.screen.blit(text, textRect)
